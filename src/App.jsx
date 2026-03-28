@@ -367,7 +367,7 @@ function Products() {
                 <div className="product-category">{product.category}</div>
                 <div className="product-title">{product.title}</div>
                 <button className="product-order-btn">
-                  🏷️ Lihat Harga
+                  🏷️ Harga
                 </button>
               </div>
             </div>
