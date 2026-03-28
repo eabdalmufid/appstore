@@ -1,0 +1,70 @@
+name: Download Product Images
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/download-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download product images
+        run: |
+          mkdir -p public/images
+          declare -A images=(
+            ["alight-motion.webp"]="https://vip-reseller.co.id/library/assets/images/product/alight-motion.webp"
+            ["primevideo-icon.png"]="https://vip-reseller.co.id/library/assets/images/game/primevideo-icon.png"
+            ["bstation.webp"]="https://vip-reseller.co.id/library/assets/images/product/bstation.webp"
+            ["canva-pro.webp"]="https://th-live-05.slatic.net/p/eb6e9b42a3ee41f31451c7bc6d29e86e.jpg_720x720q80.jpg_.webp"
+            ["capcut-logo.jpg"]="https://vip-reseller.co.id/library/assets/images/product/capcut-logo.jpg"
+            ["chatgpt.webp"]="https://vip-reseller.co.id/library/assets/images/product/chatgpt.webp"
+            ["disney-hotstar-icon.jpg"]="https://vip-reseller.co.id/library/assets/images/game/disney-hotstar-icon.jpg"
+            ["gemini.webp"]="https://vip-reseller.co.id/library/assets/images/product/gemini.webp"
+            ["get-contact.png"]="https://vip-reseller.co.id/library/assets/images/product/get-contact.png"
+            ["iqiyi-icon.webp"]="https://vip-reseller.co.id/library/assets/images/product/iqiyi-icon.webp"
+            ["netflix.jpg"]="https://vip-reseller.co.id/library/assets/images/game/netflix.jpg"
+            ["perplexity.webp"]="https://vip-reseller.co.id/library/assets/images/product/perplexity.webp"
+            ["rcti-plus.webp"]="https://vip-reseller.co.id/library/assets/images/product/rcti-plus.webp"
+            ["spotify.jpg"]="https://vip-reseller.co.id/library/assets/images/game/spotify.jpg"
+            ["vidio-premier.jpg"]="https://vip-reseller.co.id/library/assets/images/game/vidio-premier.jpg"
+            ["vision-plus.png"]="https://vip-reseller.co.id/library/assets/images/product/vision-plus.png"
+            ["viu-icon.jpg"]="https://vip-reseller.co.id/library/assets/images/game/viu-icon.jpg"
+            ["wetv-premium.jpg"]="https://cf.shopee.co.id/file/bcc57869475b868a686844e4fb82e4ee"
+            ["youtube-new.jpg"]="https://vip-reseller.co.id/library/assets/images/game/youtube-new.jpg"
+          )
+
+          failed=()
+          for filename in "${!images[@]}"; do
+            url="${images[$filename]}"
+            echo -n "Downloading $filename ... "
+            if curl -fsSL -A "Mozilla/5.0" --retry 3 --retry-delay 2 -o "public/images/$filename" "$url"; then
+              size=$(wc -c < "public/images/$filename")
+              echo "OK (${size} bytes)"
+            else
+              echo "FAILED"
+              failed+=("$filename")
+            fi
+          done
+
+          if [ ${#failed[@]} -gt 0 ]; then
+            echo "::warning::Failed to download: ${failed[*]}"
+          fi
+
+      - name: Commit images to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/images/
+          if git diff --cached --quiet; then
+            echo "No new images to commit"
+          else
+            git commit -m "chore: add product images to repository"
+            git push
+          fi
