@@ -622,7 +622,7 @@ a {
 }
 
 .product-category {
-  font-size: 0.72rem;
+  font-size: 0.52rem;
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -645,7 +645,7 @@ a {
   border: none;
   padding: 0.65rem;
   border-radius: 10px;
-  font-size: 0.82rem;
+  font-size: 0.62rem;
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.2s, transform 0.2s;

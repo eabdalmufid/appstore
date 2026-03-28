@@ -489,10 +489,10 @@ function Footer() {
             📱 <a href={waLink()} target="_blank" rel="noreferrer">WhatsApp: +62 895-0995-2003</a>
           </div>
           <div className="footer-contact-item">
-            ✉️ <a href="mailto:mail@affidev.com">mail@affidev.com</a>
+            ✉️ <a href="mailto:mail@affidev.com">Email: mail@affidev.com</a>
           </div>
           <div className="footer-contact-item">
-            🕐 Layanan 24/7
+            🕐 <a href="">Layanan 24/7</a>
           </div>
         </div>
       </div>
