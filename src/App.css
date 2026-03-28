@@ -127,7 +127,8 @@ a {
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding: 120px 2rem 80px;
+  padding: 140px 2rem 80px;
+  scroll-margin-top: 96px;
 }
 
 .hero-bg {
@@ -319,6 +320,7 @@ a {
 
 .section-full {
   padding: 100px 2rem;
+  scroll-margin-top: 96px;
 }
 
 .section-title {
@@ -535,8 +537,8 @@ a {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.35rem;
 }
 
 .product-card {
@@ -937,9 +939,9 @@ footer {
 /* ===== FLOATING WHATSAPP ===== */
 .floating-wa {
   position: fixed;
-  bottom: 5rem;
+  bottom: 6rem;
   right: 1.25rem;
-  z-index: 998;
+  z-index: 1002;
   background: linear-gradient(135deg, #25D366, #128C7E);
   color: #fff;
   border-radius: 50px;
@@ -966,7 +968,7 @@ footer {
 /* On desktop hide the label, show as circle */
 @media (min-width: 769px) {
   .floating-wa {
-    bottom: 5.5rem;
+    bottom: 6.25rem;
     right: 2rem;
     border-radius: 50%;
     padding: 0.9rem;
@@ -983,7 +985,8 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
   .products-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.1rem;
   }
 }
 
@@ -1052,10 +1055,12 @@ footer {
   /* ── Sections ── */
   .section-full {
     padding: 64px 1.25rem;
+    scroll-margin-top: 84px;
   }
 
   .section {
     padding: 64px 1.25rem;
+    scroll-margin-top: 84px;
   }
 
   .section-title {
@@ -1068,8 +1073,9 @@ footer {
 
   /* ── Hero ── */
   .hero {
-    padding: 96px 1.25rem 56px;
+    padding: 112px 1.25rem 64px;
     min-height: auto;
+    scroll-margin-top: 84px;
   }
 
   .hero-content {
@@ -1176,8 +1182,8 @@ footer {
 
   /* ── Products ── */
   .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.875rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
   }
 
   .product-order-btn {
@@ -1260,19 +1266,34 @@ footer {
   }
 }
 
+@media (max-width: 640px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .section-full,
+  .hero {
+    scroll-margin-top: 78px;
+  }
+}
+
 @media (max-width: 480px) {
   /* ── Sections ── */
   .section-full {
     padding: 52px 1rem;
+    scroll-margin-top: 76px;
   }
 
   .section {
     padding: 52px 1rem;
+    scroll-margin-top: 76px;
   }
 
   /* ── Hero ── */
   .hero {
-    padding: 88px 1rem 48px;
+    padding: 96px 1rem 52px;
+    scroll-margin-top: 76px;
   }
 
   .hero-text h1 {
