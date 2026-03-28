@@ -7,6 +7,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
@@ -127,7 +128,7 @@ a {
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding: 120px 2rem 80px;
+  padding: 140px 2rem 90px;
 }
 
 .hero-bg {
@@ -912,8 +913,8 @@ footer {
 /* ===== BACK TO TOP ===== */
 .back-to-top {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 4.25rem;
+  right: 1.25rem;
   width: 44px;
   height: 44px;
   background: linear-gradient(135deg, #8B5CF6, #3B82F6);
@@ -937,7 +938,7 @@ footer {
 /* ===== FLOATING WHATSAPP ===== */
 .floating-wa {
   position: fixed;
-  bottom: 5rem;
+  bottom: 1.25rem;
   right: 1.25rem;
   z-index: 998;
   background: linear-gradient(135deg, #25D366, #128C7E);
@@ -966,7 +967,7 @@ footer {
 /* On desktop hide the label, show as circle */
 @media (min-width: 769px) {
   .floating-wa {
-    bottom: 5.5rem;
+    bottom: 1.75rem;
     right: 2rem;
     border-radius: 50%;
     padding: 0.9rem;
@@ -974,6 +975,11 @@ footer {
 
   .floating-wa-label {
     display: none;
+  }
+
+  .back-to-top {
+    bottom: 4.75rem;
+    right: 2rem;
   }
 }
 
@@ -988,6 +994,9 @@ footer {
 }
 
 @media (max-width: 768px) {
+  html {
+    scroll-padding-top: 80px;
+  }
   /* ── Navbar ── */
   .navbar {
     padding: 0 1.25rem;
@@ -1068,7 +1077,7 @@ footer {
 
   /* ── Hero ── */
   .hero {
-    padding: 96px 1.25rem 56px;
+    padding: 118px 1.25rem 64px;
     min-height: auto;
   }
 
@@ -1176,13 +1185,26 @@ footer {
 
   /* ── Products ── */
   .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.875rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .product-card {
+    border-radius: 16px;
+  }
+
+  .product-info {
+    padding: 0.95rem;
+  }
+
+  .product-title {
+    font-size: 0.9rem;
   }
 
   .product-order-btn {
-    min-height: 44px;
-    font-size: 0.88rem;
+    min-height: 42px;
+    font-size: 0.82rem;
+    padding: 0.6rem;
   }
 
   /* ── Testimonials ── */
@@ -1255,8 +1277,13 @@ footer {
   .back-to-top {
     width: 48px;
     height: 48px;
-    bottom: 1.5rem;
+    bottom: 4rem;
     right: 1.25rem;
+  }
+
+  .floating-wa {
+    bottom: 1rem;
+    right: 1rem;
   }
 }
 
@@ -1272,7 +1299,7 @@ footer {
 
   /* ── Hero ── */
   .hero {
-    padding: 88px 1rem 48px;
+    padding: 110px 1rem 56px;
   }
 
   .hero-text h1 {
@@ -1367,16 +1394,16 @@ footer {
 
   /* ── Products ── */
   .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
   }
 
   .product-info {
-    padding: 0.875rem;
+    padding: 0.75rem;
   }
 
   .product-title {
-    font-size: 0.88rem;
+    font-size: 0.82rem;
   }
 
   /* ── Testimonials ── */
