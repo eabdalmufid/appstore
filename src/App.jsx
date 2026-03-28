@@ -265,6 +265,39 @@ function Hero() {
   );
 }
 
+/* ── Quick Actions (mobile-first) ── */
+function QuickActions() {
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+  return (
+    <div className="quick-actions" aria-label="Navigasi cepat">
+      <div className="quick-actions-grid">
+        <button type="button" className="qa-card" onClick={() => scrollTo('products')}>
+          <span className="qa-icon">🛒</span>
+          <div>
+            <div className="qa-label">Lihat Produk</div>
+            <div className="qa-desc">19+ koleksi terbaru</div>
+          </div>
+        </button>
+        <button type="button" className="qa-card" onClick={() => scrollTo('about')}>
+          <span className="qa-icon">✨</span>
+          <div>
+            <div className="qa-label">Keunggulan</div>
+            <div className="qa-desc">Garansi & cepat</div>
+          </div>
+        </button>
+        <a className="qa-card" href={waLink('Halo, saya ingin konsultasi produk premium!')} target="_blank" rel="noreferrer">
+          <span className="qa-icon">💬</span>
+          <div>
+            <div className="qa-label">Chat Admin</div>
+            <div className="qa-desc">Respons kilat 24/7</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  );
+}
+
 /* ── Features ── */
 const FEATURES = [
   { icon: '✅', title: 'Garansi Aktif', desc: 'Setiap produk dijamin aktif. Jika ada masalah, kami siap ganti rugi segera.' },
@@ -363,14 +396,15 @@ function Products() {
                   </span>
                 )}
               </div>
-              <div className="product-info">
-                <div className="product-category">{product.category}</div>
-                <div className="product-title">{product.title}</div>
-                <button className="product-order-btn">
-                  🏷️ Lihat Harga
-                </button>
+                <div className="product-info">
+                  <div className="product-category">{product.category}</div>
+                  <div className="product-title">{product.title}</div>
+                  <div className="product-subtext">Tap untuk lihat detail & harga</div>
+                  <button className="product-order-btn">
+                    🏷️ Lihat Harga
+                  </button>
+                </div>
               </div>
-            </div>
           ))}
         </div>
       </div>
@@ -522,6 +556,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <QuickActions />
         <Features />
         <Products />
         <Testimonials />
