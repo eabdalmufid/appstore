@@ -8,6 +8,18 @@ function formatRupiah(amount) {
   return 'Rp ' + Math.round(amount).toLocaleString('id-ID');
 }
 
+function toSlug(title) {
+  return title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
+
+function getProductFromUrl() {
+  const hash = window.location.hash.slice(1);
+  const path = window.location.pathname.slice(1);
+  const slug = hash || path;
+  if (!slug) return null;
+  return products.find(p => toSlug(p.title) === slug);
+}
+
 /* ── Product Modal ── */
 function ProductModal({ product, onClose }) {
   const [plans, setPlans]       = useState([]);
@@ -304,6 +316,36 @@ function Products() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Auto-open modal from URL hash (e.g. #capcut-pro) or path (e.g. /capcut-pro)
+  useEffect(() => {
+    const product = getProductFromUrl();
+    if (product) {
+      setSelectedProduct(product);
+      setTimeout(() => {
+        document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, []);
+
+  // React to hash changes while page is open
+  useEffect(() => {
+    const handleHashChange = () => {
+      const product = getProductFromUrl();
+      if (product) setSelectedProduct(product);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const handleCloseModal = () => {
+    setSelectedProduct(null);
+    // Remove product slug from hash when closing
+    const slug = window.location.hash.slice(1);
+    if (slug && products.some(p => toSlug(p.title) === slug)) {
+      window.history.pushState('', document.title, window.location.pathname + window.location.search);
+    }
+  };
+
   const filtered = products.filter(p => {
     const matchCategory = activeCategory === 'Semua' || p.category === activeCategory;
     const matchSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -376,7 +418,7 @@ function Products() {
       </div>
 
       {selectedProduct && (
-        <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+        <ProductModal product={selectedProduct} onClose={handleCloseModal} />
       )}
     </section>
   );
